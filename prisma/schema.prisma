@@ -1,0 +1,57 @@
+// 1. Client Generator
+generator client {
+  provider = "prisma-client-js"
+}
+
+// 2. Database Connection
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// 3. Table Definitions
+
+model Enrolment {
+  id              Int     @id @default(autoincrement())
+  state           String
+  district        String
+  pincode         String
+  date            String? // Optional because some files might not have it
+  
+  // Metrics
+  age_0_5         Int     @default(0)
+  age_5_17        Int     @default(0)
+  age_18_greater  Int     @default(0)
+
+  // Indexes for faster AI search
+  @@index([state])
+  @@index([district])
+}
+
+model Demographic {
+  id              Int     @id @default(autoincrement())
+  state           String
+  district        String
+  pincode         String
+  date            String?
+  
+  // Metrics
+  demo_age_5_17   Int     @default(0)
+  demo_age_17_    Int     @default(0) // This is the Migration signal
+
+  @@index([district])
+}
+
+model Biometric {
+  id              Int     @id @default(autoincrement())
+  state           String
+  district        String
+  pincode         String
+  date            String?
+  
+  // Metrics
+  bio_age_5_17    Int     @default(0) // This is the Compliance signal
+  bio_age_17_     Int     @default(0)
+
+  @@index([pincode])
+}

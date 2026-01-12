@@ -1,0 +1,10 @@
+fastapi
+uvicorn[standard]
+pandas
+psycopg2-binary
+sqlalchemy
+langchain
+langchain-community
+langchain-experimental
+langchain-openai      # OR langchain-google-genai if using Gemini
+python-dotenv
