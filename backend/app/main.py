@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.agents.sql_agent import ask_agent
+from app.agents.multi_agent import ask_agent
 from app.api import dashboard # <--- IMPORT NEW MODULE
 from pydantic import BaseModel
 
